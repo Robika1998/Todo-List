@@ -1,0 +1,60 @@
+ <div class="group">
+  <div class="group__title">
+     <div class="group__title-name">
+       @if (isShowTitle === true) {
+        <h2>{{todoGroup.title}}</h2>
+        <button (click)="isShowTitle = false" class="button">Change</button>
+       } @else {
+        <input 
+        type="text" class="input" 
+        [(ngModel)]="groupTitle" 
+        (blur)="onEnterValue()" 
+        (keyup.enter)="onEnterValue()"
+        placeholder="Enter Name..."
+        />
+       }
+     </div>
+     <div>
+      <button class="button" (click)="deleteGroupEvent()">Delete</button>
+     </div>
+     <div class="group__title-underline"></div>
+  </div>
+
+    <div class="group__items">
+      @for (item of todoGroup.items; track item.title; let i = $index) {
+      <ng-container [ngSwitch]="item.status">
+        <app-item-not-started
+          [todoItem]="item"
+          [index]="i"
+          (eventChangeDescription)="handleChangeitemDescription($event)"
+          (changeStatus)="handleChangeStatus($event)"
+          *ngSwitchCase="'not_started'"
+        ></app-item-not-started>
+        <app-item-in-progress
+          [todoItem]="item"
+          [index]="i"
+          (eventChangeDescription)="handleChangeitemDescription($event)"
+          (changeStatus)="handleChangeStatus($event)"
+          *ngSwitchCase="'in_progress'"
+        ></app-item-in-progress>
+        <app-item-done
+          [todoItem]="item"
+          [index]="i"
+          (eventChangeDescription)="handleChangeitemDescription($event)"
+          (changeStatus)="handleChangeStatus($event)"
+          *ngSwitchCase="'done'"
+        ></app-item-done>
+      </ng-container>
+      }
+
+      <input
+      type="text"
+      class="input"
+      placeholder="NaMe ToDo..."
+      #newTodo
+      (keyup.enter)="addNewTodo(newTodo.value); newTodo.value = ''"
+    />
+  
+    </div>
+  </div>
+

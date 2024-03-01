@@ -1,0 +1,16 @@
+.main {
+
+    &__controls {
+        display: flex;
+        flex-direction: column;
+
+        gap: 30px;
+
+        justify-content: center;
+        align-items: center;
+        
+        margin: 40px auto;
+
+        width: 35vw;
+    }
+}
