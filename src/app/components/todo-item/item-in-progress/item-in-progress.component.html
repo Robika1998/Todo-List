@@ -11,6 +11,11 @@
     @if (isShowDescriptions == true) {
         <div class="item__description">
             <textarea class="textarea" [(ngModel)]="description" cols="20" rows="10"></textarea>
+
+            <div>
+                <button class="button" (click)="emitChangeStatus(todoStatus.DONE)">It's done</button>
+                <button class="button" (click)="emitDeleteItem()">Clear</button>
+            </div>
         </div>
     }
 </div>
